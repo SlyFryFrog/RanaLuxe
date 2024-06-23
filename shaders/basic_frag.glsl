@@ -9,5 +9,12 @@ in vec2 texCoord;
 
 void main()
 {
-    outColor0 = texture(gtexture, texCoord);
+    vec4 outputColor = texture(gtexture, texCoord);
+    
+    if (outputColor.a < 0.1)
+    {
+        discard;
+    }
+
+    outColor0 = outputColor;
 }
