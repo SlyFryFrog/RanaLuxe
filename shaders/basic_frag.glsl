@@ -6,15 +6,18 @@ uniform sampler2D gtexture;
 layout(location = 0) out vec4 outColor0;
 
 in vec2 texCoord;
+in vec4 foliageColor;
 
 void main()
 {
-    vec4 outputColor = texture(gtexture, texCoord);
-    
-    if (outputColor.a < 0.1)
+    vec4 outputColorData = texture(gtexture, texCoord);
+    vec3 outputColor = outputColorData.rgb * foliageColor.rgb;
+    float transparency = outputColorData.a;
+
+    if (transparency < 0.1)
     {
         discard;
     }
 
-    outColor0 = outputColor;
+    outColor0 = vec4(outputColor, transparency);
 }
