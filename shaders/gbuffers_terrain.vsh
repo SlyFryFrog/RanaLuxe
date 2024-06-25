@@ -1,3 +1,5 @@
+#include "src/constants.glsl"
+
 #version 460 core
 
 in vec2 vaUV0;
@@ -17,6 +19,6 @@ void main()
 {
     texCoord = vaUV0;
     foliageColor = vaColor;
-    lightMapCoords = vaUV2 * (1.0 / 256.0) + (1.0 / 32.0);
+    lightMapCoords = vaUV2 * SCALE_FACTOR + OFFSET;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(vaPosition + chunkOffset, 1); // Perspective
 }
